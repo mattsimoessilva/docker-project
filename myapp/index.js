@@ -6,6 +6,10 @@ app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
 
-app.listen(port, () => {
+// Inicia o servidor e exporta a instância
+const server = app.listen(port, () => {
     console.log(`App running at http://localhost:${port}`);
 });
+
+// Exporta o app e o server para testes
+module.exports = { app, server };
