@@ -6,7 +6,7 @@ describe('GET /', () => {
         server.close(done);  // Fecha o servidor após os testes
     });
 
-    it('responds with Hello, World!', (done) => {
+    it('responds with Hello, Worlds!', (done) => {
         request(app)
             .get('/')
             .expect('Content-Type', /text/)

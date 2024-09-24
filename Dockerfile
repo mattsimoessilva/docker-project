@@ -1,20 +1,18 @@
-# Use a imagem base do Node.js
+# Use uma imagem base do Node.js
 FROM node:14
 
-# Defina o diretório de trabalho no contêiner
-WORKDIR /app
+# Crie um diretório de trabalho
+WORKDIR /usr/src/app
 
-# Copie o arquivo package.json para instalar as dependências
+# Copie o package.json e instale as dependências
 COPY package*.json ./
-
-# Instale as dependências da aplicação
 RUN npm install
 
-# Copie o código da aplicação para o contêiner
+# Copie o restante do código da aplicação
 COPY . .
 
-# Defina a porta que a aplicação irá expor
+# Exponha a porta que a aplicação irá utilizar
 EXPOSE 3000
 
 # Comando para iniciar a aplicação
-CMD ["npm", "start"]
+CMD ["node", "index.js"]  # Ajuste 'index.js' se o seu arquivo tiver outro nome
