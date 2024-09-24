@@ -20,11 +20,11 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
 
       - name: Build Docker image
-        run: docker build -t ghcr.io/${{ github.repository }}:latest .
+        run: docker build -t ghcr.io/${{ github.repository }}:latest ./myapp  # Pointing to the myapp directory
 
       - name: Run Tests
         run: |
-          docker run --rm ghcr.io/${{ github.repository }}/myapp:latest npm test  # Executa os testes dentro do container
+          docker run --rm ghcr.io/${{ github.repository }}:latest npm test  # Executa os testes dentro do container
 
       - name: Push Docker image
         run: docker push ghcr.io/${{ github.repository }}:latest
