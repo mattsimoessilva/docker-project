@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Make the entrypoint script executable
-RUN chmod ./entrypoint.sh
+RUN chmod +x ./entrypoint.sh
 
 # Expose port
 EXPOSE 3000
