@@ -35,9 +35,10 @@ jobs:
           git config --global user.name "mattsimoessilva"
 
       - name: Create Tag
+        id: create_tag  # Add an ID to reference outputs
         run: |
           git fetch --tags
-          
+
           latest_tag=$(git tag --list "test-*" | sort -V | tail -n 1)
 
           if [ -z "$latest_tag" ]; then
@@ -51,22 +52,26 @@ jobs:
           if git rev-parse "$new_tag" >/dev/null 2>&1; then
             echo "Tag $new_tag already exists locally."
           else
-            echo "Creating and pushing new tag: $new_tag"
             git tag -a "$new_tag" -m "Test release"
             git push https://x-access-token:${{ secrets.ACCESS }}@github.com/mattsimoessilva/docker-project.git "$new_tag"
           fi
+
+          echo "::set-output name=new_tag::$new_tag"
+          echo "::set-output name=new_number::$new_number"
+
 
 
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: "Test"  # Use a tag que você acabou de criar
-          release_name: "Test Release"
+          tag_name: "${{ steps.create_tag.outputs.new_tag }}"  # Use the tag you just created
+          release_name: "Test ${{ steps.create_tag.outputs.new_number }} Release"
           body: |
             Release notes for the new version.
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS }}
+
 
 
 
