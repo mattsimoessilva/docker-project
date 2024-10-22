@@ -24,7 +24,7 @@ jobs:
 
       - name: Run Tests
         run: |
-          docker run --rm ghcr.io/${{ github.repository }}:latest npm test
+          docker run --rm -w /myapp ghcr.io/${{ github.repository }}:latest npm test
 
       - name: Push Docker image
         run: docker push ghcr.io/${{ github.repository }}:latest
