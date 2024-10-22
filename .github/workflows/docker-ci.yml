@@ -42,7 +42,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: "Test  # Use a tag que você acabou de criar
+          tag_name: "Test"  # Use a tag que você acabou de criar
           release_name: "Test Release"
           body: |
             Release notes for the new version.
