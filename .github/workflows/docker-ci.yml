@@ -32,7 +32,7 @@ jobs:
       - name: Configure Git
         run: |
           git config --global user.email "matheussimoesdasilva2002@gmail.com"
-          git config --global user.name "mattsimoessilva
+          git config --global user.name "mattsimoessilva"
 
       - name: Create Release
         run: |
