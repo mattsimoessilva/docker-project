@@ -11,7 +11,7 @@ COPY my-app/package*.json ./
 RUN npm install
 
 # Copy the rest of the application
-COPY my-app .
+COPY my-app ./my-app
 
 # Make the entrypoint script executable
 RUN chmod +x ./entrypoint.sh
