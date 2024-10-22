@@ -34,7 +34,7 @@ jobs:
           git tag -a "v$(date +'%Y%m%d%H%M%S')" -m "Release on $(date)"
           git push origin --tags
 
-      -- name: Install Railway
+      - name: Install Railway
         run: npm i -g @railway/cli
 
       - name: Deploy
