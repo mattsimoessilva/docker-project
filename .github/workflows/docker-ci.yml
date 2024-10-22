@@ -42,7 +42,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: "v$(date +'%Y%m%d%H%M%S')"  # Use a tag que você acabou de criar
+          tag_name: "v$(date)"  # Use a tag que você acabou de criar
           release_name: "Release on $(date)"
           body: |
             Release notes for the new version.
