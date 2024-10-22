@@ -45,6 +45,5 @@ jobs:
       - name: Deploy
         run: railway up
         env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.ACCESS }}
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_PROJECT_ID }}
 
