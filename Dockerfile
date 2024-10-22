@@ -1,29 +1,19 @@
-# Use a base image
+# Use uma imagem base do Node.js
 FROM node:14
 
-# Set working directory
+# Crie um diretório de trabalho
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json
+# Copie o package.json e package-lock.json (se existir) e instale as dependências
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy the entrypoint script
-COPY entrypoint.sh ./
-
-# Verify if entrypoint.sh exists
-RUN ls -l  # Para verificação
-
-# Make the entrypoint script executable
-RUN chmod +x ./entrypoint.sh
-
-# Copy rest of the application
+# Copie o restante do código da aplicação
 COPY . .
 
-# Expose port
+# Exponha a porta que a aplicação irá utilizar
 EXPOSE 3000
 
-# Entry point script to handle command properly
-ENTRYPOINT ["./entrypoint.sh"]
+# Comando para iniciar a aplicação
+CMD ["node", "index.js"]  # Ajuste 'index.js' se o seu arquivo tiver outro nome
+
