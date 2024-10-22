@@ -36,7 +36,10 @@ jobs:
 
       - name: Create Tag
         run: |
-          git tag -a "test" -m "Test release"
+          latest_tag=$(git tag --list "test-*" | sort -V | tail -n 1)
+          new_number=$(( $(echo $latest_tag | sed 's/test-//') + 1 ))
+          git tag -a "test-$new_number" -m "Test release"
+
           git push https://x-access-token:${{ secrets.ACCESS }}@github.com/mattsimoessilva/docker-project.git --tags
 
       - name: Create GitHub Release
