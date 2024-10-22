@@ -42,8 +42,12 @@ jobs:
       - name: Install Railway
         run: npm i -g @railway/cli
 
+      - name: Set up Railway Config
+        run: |
+          echo '${{ secrets.RAILWAY_CONFIG }}' > railway.json
+
       - name: Deploy
         run: |
-          railway up --ci --environment production --service docker-project
+          railway up --ci --service docker-project --environment production
         env:
           RAILWAY_API_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
