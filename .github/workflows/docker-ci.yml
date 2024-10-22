@@ -39,15 +39,18 @@ jobs:
           git tag -a "v$(date +'%Y%m%d%H%M%S')" -m "Release on $(date)"
           git push https://x-access-token:${{ secrets.ACCESS }}@github.com/mattsimoessilva/docker-project.git --tags
 
-      - name: Install Railway
-        run: npm i -g @railway/cli
-
-      - name: Set up Railway Config
+      - name: Deploy to Railway
         run: |
-          echo '${{ secrets.RAILWAY_CONFIG }}' > railway.json
-
-      - name: Deploy
-        run: |
-          railway up --ci --service docker-project --environment production
-        env:
-          RAILWAY_API_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          curl -X POST "https://backboard.railway.app/graphql/v2" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.RAILWAY_TOKEN }}" \
+            -d '{
+              "query": "mutation($input: DeployServiceInput!) { deployService(input: $input) { id, url, status } }",
+              "variables": {
+                "input": {
+                  "serviceId": "8e0ef64a-2e89-4d27-abb7-62717f7c8106",
+                  "environmentId": "3a3ba090-31fe-4fc8-9a04-7f561b28be18",
+                  "directory": "./myapp"
+                }
+              }
+            }'
