@@ -45,12 +45,6 @@ jobs:
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${{ secrets.RAILWAY_TOKEN }}" \
             -d '{
-              "query": "mutation($input: DeployServiceInput!) { deployService(input: $input) { id, url, status } }",
-              "variables": {
-                "input": {
-                  "serviceId": "8e0ef64a-2e89-4d27-abb7-62717f7c8106",
-                  "environmentId": "3a3ba090-31fe-4fc8-9a04-7f561b28be18",
-                  "directory": "./myapp"
-                }
-              }
+              "query": "mutation { deploymentInstanceExecutionCreate(input: { serviceInstanceId: \"8e0ef64a-2e89-4d27-abb7-62717f7c8106\" }) { id url status } }"
             }'
+
