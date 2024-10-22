@@ -15,6 +15,6 @@ COPY . .
 EXPOSE 3000
 
 # Comando para iniciar a aplicação
-ENTRYPOINT ["node", "index.js"]
+ENTRYPOINT ["node", "myapp/index.js"]
 
 
