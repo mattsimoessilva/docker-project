@@ -5,16 +5,16 @@ FROM node:14
 WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json
-COPY my-app/package*.json ./
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the application
-COPY my-app ./my-app
+# Copy rest of the application
+COPY . .
 
 # Make the entrypoint script executable
-RUN chmod +x ./entrypoint.sh
+RUN chmod ./entrypoint.sh
 
 # Expose port
 EXPOSE 3000
