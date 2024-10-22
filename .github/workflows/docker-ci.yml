@@ -28,3 +28,21 @@ jobs:
 
       - name: Push Docker image
         run: docker push ghcr.io/${{ github.repository }}:latest
+
+      - name: Deploy to Railway
+        uses: railwayapp/railway-action@v1
+        with:
+          railwayProjectId: ${{ secrets.RAILWAY_PROJECT_ID }}  # O ID do seu projeto Railway
+          railwayToken: ${{ secrets.RAILWAY_TOKEN }}  # Token de acesso do Railway
+          dockerImage: ghcr.io/${{ github.repository }}:latest  # Imagem a ser usada no Railway
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ github.run_number }}  # Tag com base no número da execução
+          release_name: Release v${{ github.run_number }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Token de acesso ao GitHub
