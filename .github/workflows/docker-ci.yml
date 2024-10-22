@@ -46,4 +46,4 @@ jobs:
         run: railway up
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACCESS }}
