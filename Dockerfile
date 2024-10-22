@@ -15,5 +15,5 @@ COPY . .
 EXPOSE 3000
 
 # Comando para iniciar a aplicação
-CMD ["node", "myapp/index.js"]  # Ajuste 'index.js' se o seu arquivo tiver outro nome
+CMD [\"node\", \"index.js\"]
 
