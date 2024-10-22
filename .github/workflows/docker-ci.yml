@@ -37,7 +37,7 @@ jobs:
       - name: Create Release
         run: |
           git tag -a "v$(date +'%Y%m%d%H%M%S')" -m "Release on $(date)"
-          git push origin --tags
+          git push https://x-access-token:${{ secrets.ACCESS }}@github.com/mattsimoessilva/docker-project.git --tags
 
       - name: Install Railway
         run: npm i -g @railway/cli
