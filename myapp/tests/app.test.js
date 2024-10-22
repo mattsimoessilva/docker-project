@@ -1,5 +1,5 @@
 const request = require('supertest');
-const { app, server } = require('./index');  // Ajuste o caminho conforme necessário
+const { app, server } = require('../index');  // Ajuste o caminho conforme necessário
 
 describe('GET /', () => {
     afterAll((done) => {
