@@ -33,10 +33,14 @@ jobs:
         run: curl -sSL https://railway.app/install.sh | sh
 
       - name: Login to Railway
-        run: railway login --apiKey ${{ secrets.RAILWAY_TOKEN }}  # Use your Railway API key
+        run: |
+          export RAILWAY_TOKEN=${{ secrets.RAILWAY_TOKEN }}  # Set the Railway token as an environment variable
+          railway login  # Just run 'railway login' without any arguments
 
       - name: Deploy to Railway
-        run: railway up --projectId ${{ secrets.RAILWAY_PROJECT_ID }} --image ghcr.io/${{ github.repository }}:latest
+        run: |
+          export RAILWAY_TOKEN=${{ secrets.RAILWAY_TOKEN }}  # Set the Railway token again if needed
+          railway up --projectId ${{ secrets.RAILWAY_PROJECT_ID }} --image ghcr.io/${{ github.repository }}:latest
 
       - name: Create Release
         run: |
