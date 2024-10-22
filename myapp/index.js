@@ -13,3 +13,4 @@ const server = app.listen(port, () => {
 
 // Exporta o app e o server para testes
 module.exports = { app, server };
+
