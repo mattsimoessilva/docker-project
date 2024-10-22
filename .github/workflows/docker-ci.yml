@@ -36,6 +36,8 @@ jobs:
 
       - name: Create Tag
         run: |
+          git fetch --tags
+          
           latest_tag=$(git tag --list "test-*" | sort -V | tail -n 1)
 
           if [ -z "$latest_tag" ]; then
@@ -44,9 +46,16 @@ jobs:
             new_number=$(( $(echo $latest_tag | sed 's/test-//') + 1 ))
           fi
 
-          git tag -a "test-$new_number" -m "Test release"
+          new_tag="test-$new_number"
 
-          git push https://x-access-token:${{ secrets.ACCESS }}@github.com/mattsimoessilva/docker-project.git "test-$new_number"
+          if git rev-parse "$new_tag" >/dev/null 2>&1; then
+            echo "Tag $new_tag already exists locally."
+          else
+            echo "Creating and pushing new tag: $new_tag"
+            git tag -a "$new_tag" -m "Test release"
+            git push https://x-access-token:${{ secrets.ACCESS }}@github.com/mattsimoessilva/docker-project.git "$new_tag"
+          fi
+
 
 
       - name: Create GitHub Release
