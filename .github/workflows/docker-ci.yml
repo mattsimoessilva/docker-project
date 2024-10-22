@@ -36,14 +36,14 @@ jobs:
 
       - name: Create Release
         run: |
-          git tag -a "v$(date +'%Y%m%d%H%M%S')" -m "Release on $(date)"
+          git tag -a "test" -m "Test release"
           git push https://x-access-token:${{ secrets.ACCESS }}@github.com/mattsimoessilva/docker-project.git --tags
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: "v$(date)"  # Use a tag que você acabou de criar
-          release_name: "Release on $(date)"
+          tag_name: "Test  # Use a tag que você acabou de criar
+          release_name: "Test Release"
           body: |
             Release notes for the new version.
         env:
