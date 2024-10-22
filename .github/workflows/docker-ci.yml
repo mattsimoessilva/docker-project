@@ -37,10 +37,17 @@ jobs:
       - name: Create Tag
         run: |
           latest_tag=$(git tag --list "test-*" | sort -V | tail -n 1)
-          new_number=$(( $(echo $latest_tag | sed 's/test-//') + 1 ))
+
+          if [ -z "$latest_tag" ]; then
+            new_number=1
+          else
+            new_number=$(( $(echo $latest_tag | sed 's/test-//') + 1 ))
+          fi
+
           git tag -a "test-$new_number" -m "Test release"
 
-          git push https://x-access-token:${{ secrets.ACCESS }}@github.com/mattsimoessilva/docker-project.git --tags
+          git push https://x-access-token:${{ secrets.ACCESS }}@github.com/mattsimoessilva/docker-project.git "test-$new_number"
+
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
