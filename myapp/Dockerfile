@@ -14,7 +14,8 @@ COPY . .
 # Exponha a porta que a aplicação irá utilizar
 EXPOSE 3000
 
-
+# Comando para iniciar a aplicação
+ENTRYPOINT ["node", "index.js"]
 
 
 
