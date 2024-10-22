@@ -11,10 +11,14 @@ RUN npm install
 # Copie o restante do código da aplicação
 COPY . .
 
+# Mude o diretório de trabalho para myapp
+WORKDIR /usr/src/app/myapp
+
 # Exponha a porta que a aplicação irá utilizar
 EXPOSE 3000
 
 # Comando para iniciar a aplicação
-ENTRYPOINT ["node", "myapp/index.js"]
+ENTRYPOINT ["node", "index.js"]
+
 
 
