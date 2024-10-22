@@ -4,7 +4,7 @@ FROM node:14
 # Crie um diretório de trabalho
 WORKDIR /usr/src/app
 
-# Copie o package.json e instale as dependências
+# Copie o package.json e package-lock.json (se existir) e instale as dependências
 COPY package*.json ./
 RUN npm install
 
