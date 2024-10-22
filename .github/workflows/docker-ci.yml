@@ -48,3 +48,4 @@ jobs:
             Release notes for the new version.
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS }}
+
