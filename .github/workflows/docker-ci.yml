@@ -39,12 +39,4 @@ jobs:
           git tag -a "v$(date +'%Y%m%d%H%M%S')" -m "Release on $(date)"
           git push https://x-access-token:${{ secrets.ACCESS }}@github.com/mattsimoessilva/docker-project.git --tags
 
-      - name: Deploy to Railway
-        run: |
-          curl -X POST "https://backboard.railway.app/graphql/v2" \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer ${{ secrets.RAILWAY_TOKEN }}" \
-            -d '{
-              "query": "mutation { deploymentInstanceExecutionCreate(input: { serviceInstanceId: \"8e0ef64a-2e89-4d27-abb7-62717f7c8106\" }) { id url status } }"
-            }'
 
