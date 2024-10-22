@@ -29,21 +29,14 @@ jobs:
       - name: Push Docker image
         run: docker push ghcr.io/${{ github.repository }}:latest
 
-      - name: Install Railway CLI
-        run: curl -sSL https://railway.app/install.sh | sh
-
-      - name: Print Project ID
-        run: echo ${{ secrets.RAILWAY_PROJECT_ID }}
-
-
-      - name: Deploy to Railway
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}  # Set the Railway token as an environment variable
-        run:  railway up
-
-
       - name: Create Release
         run: |
           git tag -a "v$(date +'%Y%m%d%H%M%S')" -m "Release on $(date)"
           git push origin --tags
+
+      - name: Deploy to Railway
+        uses: railwayapp/github-actions/deploy@v1
+        with:
+          repo: https://github.com/mattsimoessilva/docker-project.git
+          branch: master
 
