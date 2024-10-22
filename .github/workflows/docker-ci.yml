@@ -35,8 +35,9 @@ jobs:
           git push origin --tags
 
       - name: Deploy to Railway
-        uses: docker-project/github-actions/deploy@v1
-        with:
-          repo: https://github.com/mattsimoessilva/docker-project.git
-          branch: master
+      uses: railwayapp/railway-action@v1  # Hypothetical external action
+      with:
+        repo: https://github.com/mattsimoessilva/docker-project.git
+        branch: master
+
 
